@@ -2,21 +2,23 @@ import java.util.*;
 import java.io.*;
 
 public class MaxPairwiseProduct {
-    static int getMaxPairwiseProduct(int[] numbers) {
-        // instead of multiplying each one and then finding the max:
-        // 1st = find the two largest numbers
-        // 2nd = multiply the two largest and return the value
-        int largest_1 = Integer.MIN_VALUE, largest_2 = Integer.MIN_VALUE;
-        for (int value : numbers) {
-            if (value > largest_1) {
-                largest_2 = largest_1;
-                largest_1 = value;
-            } else if (value > largest_2) {
-                largest_2 = value;
+    static long getMaxPairwiseProduct(int[] numbers) {
+        int n = numbers.length;
+
+        int max_index1 = -1;
+        for (int i = 0; i < n; ++i) {
+            if ((max_index1 == -1) || (numbers[i] > numbers[max_index1])) {
+                max_index1 = i;
             }
         }
 
-        return largest_1 * largest_2;
+        int max_index2 = -1;
+        for (int j = 0; j < n; ++j) {
+            if ((j != max_index1) && ((max_index2 == -1) || (numbers[j] > numbers[max_index2]))) {
+                max_index2 = j;
+            }
+        }
+        return ((long) numbers[max_index1]) * numbers[max_index2];
     }
 
     public static void main(String[] args) {
