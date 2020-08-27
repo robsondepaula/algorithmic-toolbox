@@ -3,7 +3,36 @@ import java.io.*;
 
 public class CarFueling {
     static int computeMinRefills(int dist, int tank, int[] stops) {
-        return -1;
+        int currentRefills = 0;
+        int lastRefills = 0;
+        int numRefills = 0;
+        int n = stops.length;
+
+        int traject[] = new int[n + 2];
+        traject[0] = 0;
+        for (int i = 0; i < n; i++) {
+            traject[i + 1] = stops[i];
+        }
+        traject[n + 1] = dist;
+
+        n = traject.length;
+        while (currentRefills < (n - 1)) {
+            lastRefills = currentRefills;
+            while ((traject[currentRefills + 1] - traject[lastRefills]) <= tank) {
+                currentRefills++;
+                if (currentRefills == (n - 1)) {
+                    break;
+                }
+            }
+            if (currentRefills == lastRefills) {
+                return -1;
+            }
+            if (currentRefills < (n - 1)) {
+                numRefills++;
+            }
+        }
+
+        return numRefills;
     }
 
     public static void main(String[] args) {
