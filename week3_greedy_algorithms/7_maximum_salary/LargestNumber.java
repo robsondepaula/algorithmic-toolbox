@@ -2,7 +2,7 @@ import java.util.*;
 
 public class LargestNumber {
     private static String largestNumber(String[] a) {
-        //write your code here
+        Arrays.sort(a, Comparator.reverseOrder());
         String result = "";
         for (int i = 0; i < a.length; i++) {
             result += a[i];
@@ -17,6 +17,7 @@ public class LargestNumber {
         for (int i = 0; i < n; i++) {
             a[i] = scanner.next();
         }
+        scanner.close();
         System.out.println(largestNumber(a));
     }
 }
