@@ -9,7 +9,29 @@ public class MajorityElement {
         if (left + 1 == right) {
             return a[left];
         }
-        //write your code here
+        int leftMajor = getMajorityElement(a, left, (left + right - 1) / 2 + 1);
+        int rightMajor = getMajorityElement(a, (left + right - 1) / 2 + 1, right);
+
+        int leftFreq = 0;
+        for (int i = left; i < right; i++) {
+            if (a[i] == leftMajor) {
+                leftFreq++;
+            }
+        }
+        if (leftFreq > (right - left) / 2) {
+            return leftMajor;
+        }
+
+        int rightFreq = 0;
+        for (int i = left; i < right; i++) {
+            if (a[i] == rightMajor) {
+                rightFreq++;
+            }
+        }
+        if (rightFreq > (right - left) / 2) {
+            return rightMajor;
+        }
+
         return -1;
     }
 
@@ -26,6 +48,7 @@ public class MajorityElement {
             System.out.println(0);
         }
     }
+
     static class FastScanner {
         BufferedReader br;
         StringTokenizer st;
@@ -54,4 +77,3 @@ public class MajorityElement {
         }
     }
 }
-
