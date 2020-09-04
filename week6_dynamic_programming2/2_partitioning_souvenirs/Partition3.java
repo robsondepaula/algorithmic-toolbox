@@ -1,10 +1,32 @@
 import java.util.*;
-import java.io.*;
 
 public class Partition3 {
     private static int partition3(int[] A) {
-        //write your code here
-        return 0;
+        int n = A.length;
+        int sum = A[0];
+        for (int i = 1; i < n; i++) {
+            sum += A[i];
+        }
+
+        if (sum == 0 || sum % 3 != 0)
+        {
+            return 0;
+        }
+        
+        int[][] tab = new int[sum / 3 + 1][n + 1];
+
+        for (int i = 1; i <= sum / 3; i++) {
+            for (int j = 1; j <= n; j++) {
+                int diff = i - A[j - 1];
+                if ((A[j - 1] == i) || (diff > 0 && tab[diff][j - 1] > 0)) {
+                    tab[i][j] = (tab[i][j - 1] == 0) ? 1 : 2;
+                } else {
+                    tab[i][j] = tab[i][j - 1];
+                }
+            }
+        }
+
+        return (tab[sum / 3][n] == 2) ? 1 : 0;
     }
 
     public static void main(String[] args) {
@@ -14,7 +36,7 @@ public class Partition3 {
         for (int i = 0; i < n; i++) {
             A[i] = scanner.nextInt();
         }
+        scanner.close();
         System.out.println(partition3(A));
     }
 }
-
