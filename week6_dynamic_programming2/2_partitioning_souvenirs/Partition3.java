@@ -8,11 +8,10 @@ public class Partition3 {
             sum += A[i];
         }
 
-        if (sum == 0 || sum % 3 != 0)
-        {
+        if (sum == 0 || sum % 3 != 0) {
             return 0;
         }
-        
+
         int[][] tab = new int[sum / 3 + 1][n + 1];
 
         for (int i = 1; i <= sum / 3; i++) {
